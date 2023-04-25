@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "ArtPlace Backend built with NodeJS and GraphQL",
+  "author": "pavanleton <pavankumarkpkp@gmail.com>",
+  "homepage": "https://github.com/pavankpdev/ArtPlace#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavankpdev/ArtPlace.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/server.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/pavankpdev/ArtPlace/issues"
+  }
+}
