@@ -1,18 +1,22 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
-  "description": "ArtPlace Frontend built with NextJS and TS",
-  "author": "pavanleton <pavankumarkpkp@gmail.com>",
-  "homepage": "https://github.com/pavankpdev/ArtPlace#readme",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pavankpdev/ArtPlace.git"
-  },
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "node ./__tests__/frontend.test.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "bugs": {
-    "url": "https://github.com/pavankpdev/ArtPlace/issues"
+  "dependencies": {
+    "@types/node": "18.16.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.1",
+    "next": "13.3.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.0.4"
   }
 }
