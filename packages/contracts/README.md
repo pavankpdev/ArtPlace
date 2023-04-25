@@ -1,11 +1,13 @@
-# `contracts`
+# Sample Hardhat Project
 
-> TODO: description
+This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
 
-## Usage
+Try running some of the following tasks:
 
-```
-const contracts = require('contracts');
-
-// TODO: DEMONSTRATE API
+```shell
+npx hardhat help
+npx hardhat test
+REPORT_GAS=true npx hardhat test
+npx hardhat node
+npx hardhat run scripts/deploy.ts
 ```
