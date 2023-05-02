@@ -1,4 +1,4 @@
-# ArtPlace - An Exclusive NFTs Marketplace (Updated)
+# ArtPlace - An Exclusive NFTs Marketplace
 
 ArtPlace is a decentralized NFT marketplace built on top of Ethereum blockchain. It enables artists to showcase their artwork as NFTs and collectors to purchase them using cryptocurrency. The marketplace is powered by React, NodeJS, GraphQL, TypeScript, Solidity, EVMIndex, MongoDB, and Hardhat.
 
