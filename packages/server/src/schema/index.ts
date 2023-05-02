@@ -1,7 +1,6 @@
-import { gql } from 'apollo-server-express';
+import { mergeTypeDefs } from '@graphql-tools/merge';
 
-export const typeDefs = gql`
-    type Query {
-        hello: String
-    }
-`;
+import {testTypeDefs} from "./Test";
+
+export const typeDefs = mergeTypeDefs([testTypeDefs]);
+
