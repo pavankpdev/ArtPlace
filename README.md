@@ -58,21 +58,21 @@ The server will start running at http://localhost:4000.
 To start the client, run the following commands:
 
 ```
-cd packages/client
+cd packages/frontend
 npm start
 ```
 
 or
 
 ```
-cd packages/client
+cd packages/frontend
 yarn start
 ```
 
 or
 
 ```
-cd packages/client
+cd packages/frontend
 pnpm start
 ```
 
