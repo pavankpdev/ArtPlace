@@ -5,17 +5,16 @@ dotenv.config()
 
 const MONGO_STRING = process.env.MONGO_STRING;
 
-// connect to mongodb
+
 export async function dbConnect() {
 
-    // console.log(process.env.MONGO_STRING);
+    
     mongoose.connect(process.env.MONGO_STRING!);
 
     mongoose.connection.on('connected', () => {
         console.log('Connected to MongoDB');
     });
-    // console.log(process.env.MONGO_STRING)
-
+   
     mongoose.connection.on('error', (err) => {
         console.log('Error connecting to MongoDB', err);
     })
