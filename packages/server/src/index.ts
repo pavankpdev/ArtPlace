@@ -21,7 +21,7 @@ async function startServer() {
      
 
         if (!process.env.MONGO_STRING) {
-            console.log("Mongo string is undefined!")
+            process.exit(1);
         }
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
         await dbConnect();
