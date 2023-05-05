@@ -11,5 +11,15 @@
   "devDependencies": {
     "@typechain/ethers-v5": "^10.2.0",
     "@typechain/hardhat": "^6.1.5"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage",
+    "sizer": "npx hardhat size-contracts",
+    "deploy:mumbai": "npx hardhat --network mumbai deploy",
+    "verify:mumbai": "npx hardhat --network mumbai etherscan-verify",
+    "prettier": "prettier --check \"**/*.{ts,js,sol}\"",
+    "prettier:fix": "prettier --write \"**/*.{ts,js,sol}\""
   }
 }
