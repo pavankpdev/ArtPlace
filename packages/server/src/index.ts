@@ -8,8 +8,6 @@ import dotenv from  'dotenv';
 dotenv.config();
 async function startServer() {
     const app = express();
-
-    console.log(process.env);
     const server = new ApolloServer({ typeDefs, resolvers });
 
     await server.start();
@@ -23,7 +21,7 @@ async function startServer() {
      
 
         if (!process.env.MONGO_STRING) {
-            process.exit(1);
+            console.log("Mongo string is undefined!")
         }
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
         await dbConnect();

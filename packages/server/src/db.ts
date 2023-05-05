@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const MONGO_STRING = process.env.MONGO_STRING;
 
-// connect to mongodb
+
 export async function dbConnect() {
 
     
@@ -13,8 +13,7 @@ export async function dbConnect() {
     mongoose.connection.on('connected', () => {
         console.log('Connected to MongoDB');
     });
-    
-
+   
     mongoose.connection.on('error', (err) => {
         console.log('Error connecting to MongoDB', err);
     })
