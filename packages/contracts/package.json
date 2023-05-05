@@ -1,3 +1,15 @@
 {
-  "name": "hardhat-project"
+  "name": "hardhat-project",
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.14.0",
+    "hardhat-deploy": "^0.11.27",
+    "hardhat-deploy-ethers": "0.3.0-beta.13"
+  },
+  "devDependencies": {
+    "@typechain/ethers-v5": "^10.2.0",
+    "@typechain/hardhat": "^6.1.5"
+  }
 }
