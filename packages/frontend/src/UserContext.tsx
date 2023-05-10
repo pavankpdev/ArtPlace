@@ -8,13 +8,13 @@ interface USER{
 }
 
 export type USERContextType = {
-    user:USER,
+    user?:USER,
     updateUser: (user:USER) => void
 }
 
 //initialized as null
 const UserContext = createContext<USERContextType>({
-    user:{fullName: "name", email: "email", walletAddress: "wallet Address",avatar: 'avatar'},
+    user:undefined,
     updateUser: () => {}
 });
 
