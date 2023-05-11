@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
         <Heading>ArtPlace</Heading>
-        <button onClick={updateUser}>Login</button>
-        <Heading>{!user?"Login": `Logged in as ${user.fullName}`}</Heading>
+        {!user && <button onClick={updateUser}>Click to Login</button>}
+        {user && <Heading>{`Logged in as ${user.fullName}`}</Heading>}
     </>
   )
 }

@@ -24,7 +24,7 @@ export const UserProvider = ({children}:any) => {
     const updateUser = () =>{
        //retrieve user details from db/local storage
        let user = {
-        fullName: "name",
+        fullName: "test",
         email: "email",
         walletAddress: "wallet Address",
         avatar: 'avatar'
