@@ -9,7 +9,7 @@ interface USER{
 
 export type USERContextType = {
     user?:USER,
-    updateUser: (user:USER) => void
+    updateUser: () => void
 }
 
 //initialized as null
@@ -19,14 +19,16 @@ const UserContext = createContext<USERContextType>({
 });
 
 export const UserProvider = ({children}:any) => {
-    const [user, setUser] =  useState<USER>({
-      fullName: "name",
-      email: "email",
-      walletAddress: "wallet Address",
-      avatar: 'avatar'
-    })
+    const [user, setUser] =  useState<USER| undefined>(undefined)
 
-    const updateUser = (user:USER) =>{
+    const updateUser = () =>{
+       //retrieve user details from db/local storage
+       let user = {
+        fullName: "name",
+        email: "email",
+        walletAddress: "wallet Address",
+        avatar: 'avatar'
+      }
         setUser({...user})
     }
 
