@@ -7,7 +7,7 @@ const deployToken: DeployFunction = async function (
   ) {
 
     const { getNamedAccounts, deployments, network } = hre
-    const { deploy, log } = deployments
+    const { deploy } = deployments
     const { deployer } = await getNamedAccounts()
 
     const args=[process.env.MINTER,process.env.BURNER]

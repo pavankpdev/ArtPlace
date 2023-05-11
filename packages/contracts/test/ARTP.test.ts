@@ -11,10 +11,11 @@ describe("Token contract", function () {
   beforeEach(async function () {
 
 
+
     const Token = await ethers.getContractFactory("ARTPToken");
     [deployer, minter,addr2] = await ethers.getSigners();
     
-     myToken = await Token.deploy(minter.address,minter.address);
+     myToken = await Token.deploy();
 
     await myToken.deployed();
   });
@@ -24,7 +25,7 @@ describe("Token contract", function () {
 
     it("should allow the minters to mint tokens", async () => {
       // Mint 100 tokens from minter
-      await myToken.connect(minter).mint(minter.address, 100);
+      await myToken.connect(deployer).mint(minter.address, 100);
       
       // Check that the balance of the add1 has increased by 100
       const balance = await myToken.balanceOf(minter.address);
@@ -33,7 +34,7 @@ describe("Token contract", function () {
   
     it("should not allow a non-minter to mint tokens", async function () {
       const amount = ethers.utils.parseEther("100");
-      await expect(myToken.connect(addr2).mint(minter.address, amount)).to.be.revertedWith(`AccessControl: account 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc is missing role 0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6`);
+      await expect(myToken.connect(addr2).mint(minter.address, amount)).to.be.revertedWith(`Ownable: caller is not the owner`);
     });
   
   })
@@ -43,27 +44,25 @@ describe("Token contract", function () {
 
     it("should allow the burnner to burn tokens", async function () {
       const amount = ethers.utils.parseEther("100");
-      await myToken.connect(minter).mint(minter.address, amount);
-
-      await myToken.connect(minter).burn(amount);
+      await myToken.connect(deployer).burn(amount);
       
-      const balance = await myToken.balanceOf(minter.address);
-      expect(balance).to.equal(0);
+      const balance = await myToken.balanceOf(deployer.address);
+      expect(balance).to.equal(BigInt("9999900000000000000000000"));
     });
   
     it("should not allow a non-burner to burn tokens", async function () {
-      await expect(myToken.connect(deployer).burn(100)).to.be.revertedWith("AccessControl: account 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 is missing role 0x3c11d16cbaffd01df69ce1c404f6340ee057498f5f00246190ea54220576a848")
+      await expect(myToken.connect(minter).burn(100)).to.be.revertedWith("Ownable: caller is not the owner")
      
     });
    
 
     it("Should not allow burning more tokens than account has", async function () {
 
-      const amount = ethers.utils.parseEther("100");
+      const amount = ethers.utils.parseEther("10000001");
   
-      await myToken.connect(minter).mint(minter.address, amount);
+      await myToken.connect(deployer).mint(minter.address, amount);
   
-      await expect(myToken.connect(minter).burn(amount.add(1))).to.be.revertedWith("ERC20: burn amount exceeds balance");
+      await expect(myToken.connect(deployer).burn(amount.add(1))).to.be.revertedWith("ERC20: burn amount exceeds balance");
 
 
    })
@@ -78,7 +77,7 @@ describe("Token contract", function () {
   
       const Token = await ethers.getContractFactory("ARTPToken");
   
-      const hardhatToken = await Token.deploy(minter.address,minter.address);
+      const hardhatToken = await Token.deploy();
   
       const ownerBalance = await hardhatToken.balanceOf(deployer.address);
       expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
@@ -91,7 +90,7 @@ describe('transfer', () => {
   
     const amount = ethers.utils.parseEther("100");
 
-    await myToken.connect(minter).mint(minter.address, amount);
+    await myToken.connect(deployer).mint(minter.address, amount);
 
     expect(await myToken.balanceOf(minter.address)).to.equal(amount);
     expect(await myToken.balanceOf(addr2.address)).to.equal(0);
