@@ -5,17 +5,16 @@ import { expect } from "chai";
 describe("Token contract", function () {
   let myToken:ethers.Contract;
   let deployer: ethers.Signer;
-  let addr1: ethers.Signer;
+  let minter: ethers.Signer;
   let addr2:ethers.Signer;
 
   beforeEach(async function () {
 
-    // const [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
 
     const Token = await ethers.getContractFactory("ARTPToken");
-    [deployer, addr1,addr2] = await ethers.getSigners();
+    [deployer, minter,addr2] = await ethers.getSigners();
     
-     myToken = await Token.deploy(addr1.address,addr1.address);
+     myToken = await Token.deploy(minter.address,minter.address);
 
     await myToken.deployed();
   });
@@ -24,17 +23,17 @@ describe("Token contract", function () {
   describe('Mint', () => {
 
     it("should allow the minters to mint tokens", async () => {
-      // Mint 100 tokens from addr1
-      await myToken.connect(addr1).mint(addr1.address, 100);
+      // Mint 100 tokens from minter
+      await myToken.connect(minter).mint(minter.address, 100);
       
       // Check that the balance of the add1 has increased by 100
-      const balance = await myToken.balanceOf(addr1.address);
+      const balance = await myToken.balanceOf(minter.address);
       expect(balance).to.equal(100);
     })
   
     it("should not allow a non-minter to mint tokens", async function () {
       const amount = ethers.utils.parseEther("100");
-      await expect(myToken.connect(addr2).mint(addr1.address, amount)).to.be.revertedWith(`AccessControl: account 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc is missing role 0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6`);
+      await expect(myToken.connect(addr2).mint(minter.address, amount)).to.be.revertedWith(`AccessControl: account 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc is missing role 0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6`);
     });
   
   })
@@ -44,11 +43,11 @@ describe("Token contract", function () {
 
     it("should allow the burnner to burn tokens", async function () {
       const amount = ethers.utils.parseEther("100");
-      await myToken.connect(addr1).mint(addr1.address, amount);
+      await myToken.connect(minter).mint(minter.address, amount);
 
-      await myToken.connect(addr1).burn(amount);
+      await myToken.connect(minter).burn(amount);
       
-      const balance = await myToken.balanceOf(addr1.address);
+      const balance = await myToken.balanceOf(minter.address);
       expect(balance).to.equal(0);
     });
   
@@ -62,9 +61,9 @@ describe("Token contract", function () {
 
       const amount = ethers.utils.parseEther("100");
   
-      await myToken.connect(addr1).mint(addr1.address, amount);
+      await myToken.connect(minter).mint(minter.address, amount);
   
-      await expect(myToken.connect(addr1).burn(amount.add(1))).to.be.revertedWith("ERC20: burn amount exceeds balance");
+      await expect(myToken.connect(minter).burn(amount.add(1))).to.be.revertedWith("ERC20: burn amount exceeds balance");
 
 
    })
@@ -79,7 +78,7 @@ describe("Token contract", function () {
   
       const Token = await ethers.getContractFactory("ARTPToken");
   
-      const hardhatToken = await Token.deploy(addr1.address,addr1.address);
+      const hardhatToken = await Token.deploy(minter.address,minter.address);
   
       const ownerBalance = await hardhatToken.balanceOf(deployer.address);
       expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
@@ -92,14 +91,14 @@ describe('transfer', () => {
   
     const amount = ethers.utils.parseEther("100");
 
-    await myToken.connect(addr1).mint(addr1.address, amount);
+    await myToken.connect(minter).mint(minter.address, amount);
 
-    expect(await myToken.balanceOf(addr1.address)).to.equal(amount);
+    expect(await myToken.balanceOf(minter.address)).to.equal(amount);
     expect(await myToken.balanceOf(addr2.address)).to.equal(0);
 
-    await myToken.connect(addr1).transfer(addr2.address, amount.div(2));
+    await myToken.connect(minter).transfer(addr2.address, amount.div(2));
 
-    expect(await myToken.balanceOf(addr1.address)).to.equal(amount.div(2));
+    expect(await myToken.balanceOf(minter.address)).to.equal(amount.div(2));
     expect(await myToken.balanceOf(addr2.address)).to.equal(amount.div(2));
   })
 
@@ -108,10 +107,10 @@ describe('transfer', () => {
     
     const initialOwnerBalance = await myToken.balanceOf(deployer.address);
 
-    // Try to send 1 myToken from addr1 (0 tokens) to deployer (1000 tokens).
+    // Try to send 1 myToken from minter (0 tokens) to deployer (1000 tokens).
     // `require` will evaluate false and revert the transaction.
     await expect(
-      myToken.connect(addr1).transfer(deployer.address, 1)
+      myToken.connect(minter).transfer(deployer.address, 1)
     ).to.be.revertedWith("ERC20: transfer amount exceeds balance");
 
     // Owner balance shouldn't have changed.
