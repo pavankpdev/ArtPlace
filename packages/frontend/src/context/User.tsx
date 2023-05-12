@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
-interface USER{
+interface IUser{
      fullName: string,
      email: string,
      walletAddress: string,
@@ -8,28 +8,21 @@ interface USER{
 }
 
 export type USERContextType = {
-    user?:USER,
+    user: IUser | Record<string, string>,
     updateUser: () => void
 }
 
-//initialized as null
+//initialized as undefined
 const UserContext = createContext<USERContextType>({
-    user:undefined,
+    user:{},
     updateUser: () => {}
 });
 
 export const UserProvider = ({children}:any) => {
-    const [user, setUser] =  useState<USER| undefined>(undefined)
+    const [user, setUser] =  useState<IUser|Record<string, string>>({})
 
     const updateUser = () =>{
-       //retrieve user details from db/local storage
-       let user = {
-        fullName: "test",
-        email: "email",
-        walletAddress: "wallet Address",
-        avatar: 'avatar'
-      }
-        setUser({...user})
+       //todo: retrieve user details from db/local storage
     }
 
     return (

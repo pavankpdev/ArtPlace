@@ -3,7 +3,7 @@ import type {AppProps} from "next/app";
 
 // THEME
 import ArtPlaceTheme from "@/theme";
-import { UserProvider } from '../UserContext';
+import { UserProvider } from '@/context/User';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
