@@ -12,7 +12,7 @@ export type USERContextType = {
     updateUser: () => void
 }
 
-//initialized as undefined
+//initialized as empty
 const UserContext = createContext<USERContextType>({
     user:{},
     updateUser: () => {}
