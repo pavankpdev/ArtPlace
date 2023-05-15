@@ -6,7 +6,6 @@ export default function Home() {
   const { loading, error, data } = useQuery(GET_CHARACTERS);
 
   /***   This is an example for mutation, commented it as this graphql endpoint doesn't have any mutation api 
-
     const [addCountry, { loading, error }] = useMutation<Country>(ADD_COUNTRY,{
     variables: {
       code: "INDD",
@@ -19,7 +18,6 @@ export default function Home() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
 
   return (
     <>
