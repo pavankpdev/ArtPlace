@@ -1,7 +1,7 @@
-import {Heading} from "@chakra-ui/react";
+import {Heading, Button} from "@chakra-ui/react";
 import GET_CHARACTERS from "@/gql/queries/getCharacter";
 import { useQuery } from '@apollo/client';
-
+import {useUser} from "@/context/User"
 export default function Home() {
   const { loading, error, data } = useQuery(GET_CHARACTERS);
 
@@ -16,6 +16,10 @@ export default function Home() {
 
 ***/
 
+
+  const {user, updateUser} = useUser()
+
+  
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
