@@ -1,7 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
-  schema: 'https://rickandmortyapi.com/graphql', // Replace it with your GraphQL server endpoint
+  schema: process.env.NEXT_PUBLIC_GRAPHQL_SERVER_ENDPOINT,
   generates: {
     'src/gql/__generated__/character.ts': {
       plugins: ['typescript'],

@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
 const httpLink = createHttpLink({
-  uri: 'https://rickandmortyapi.com/graphql', // Replace with your GraphQL API endpoint
+  uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER_ENDPOINT
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
